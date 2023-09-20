@@ -19,5 +19,6 @@ public class ServiceAuthApplication {
         System.out.println("greogehoewhr");
         System.out.println("I love you three hot-fix");
         System.out.println("3h3322342h");
+        ystem.out.println("greogehoewhr");
     }
 }
