@@ -13,5 +13,6 @@ public class ServiceAuthApplication {
     public static void main(String[] args) {
         System.out.println("I love JAVA!");
         SpringApplication.run(ServiceAuthApplication.class, args);
+        System.out.println("I also love you");
     }
 }
