@@ -16,8 +16,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
     //条件分页查询
     @Override
-    public IPage<SysRole> selectPage(Page<SysRole> pagePram, SysRoleQueryVo sysRoleQueryVo) {
-        IPage<SysRole> pageModel = baseMapper.selectPage(pagePram, sysRoleQueryVo);
+    public IPage<SysRole> selectPage(Page<SysRole> pageParam, SysRoleQueryVo sysRoleQueryVo) {
+        IPage<SysRole> pageModel = baseMapper.selectPage(pageParam, sysRoleQueryVo);
         return pageModel;
     }
 }

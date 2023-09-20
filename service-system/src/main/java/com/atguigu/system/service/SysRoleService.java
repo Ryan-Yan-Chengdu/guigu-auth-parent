@@ -8,5 +8,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 public interface SysRoleService extends IService<SysRole> {
     //条件分页查询
-    IPage<SysRole> selectPage(Page<SysRole> pagePram, SysRoleQueryVo sysRoleQueryVo);
+    IPage<SysRole> selectPage(Page<SysRole> pageParam, SysRoleQueryVo sysRoleQueryVo);
 }
