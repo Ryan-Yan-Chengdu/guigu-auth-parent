@@ -19,6 +19,7 @@ import java.util.List;
 public class SysRoleController {
     @Autowired
     private SysRoleService sysRoleService;
+    // http://localhost:8800/admin/system/sysRole/findAll
 
     //3.条件分页查询
     //page:当前页数，limit：每页的记录数
@@ -28,9 +29,9 @@ public class SysRoleController {
                                     @PathVariable Long limit,
                                     SysRoleQueryVo sysRoleQueryVo){
         //创建Page对象
-        Page<SysRole> pagePram = new Page<>(page,limit);
+        Page<SysRole> pageParam = new Page<>(page,limit);
         //调用service方法
-        IPage<SysRole> pageModel = sysRoleService.selectPage(pagePram, sysRoleQueryVo);
+        IPage<SysRole> pageModel = sysRoleService.selectPage(pageParam, sysRoleQueryVo);
         //返回
         return Result.ok(pageModel);
 
@@ -48,7 +49,7 @@ public class SysRoleController {
             return Result.fail();
     }
 
-    //http://localhost:8800/admin/system/sysRole/findAll
+
     //1.查询所有记录
     @ApiOperation("查询所有记录")
     @GetMapping("findAll")
