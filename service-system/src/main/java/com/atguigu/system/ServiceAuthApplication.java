@@ -23,5 +23,6 @@ public class ServiceAuthApplication {
         System.out.println("1518 EDITED");
         System.out.println("1549 edited");
         System.out.println("gehoewtew");
+        System.out.println("hot-fix is now on the way...");
     }
 }
