@@ -99,6 +99,8 @@ public class SysRoleController {
     @ApiOperation("查询所有记录")
     @GetMapping("findAll")
     public Result findAllRole(){
+        //TODO 模拟异常效果
+        int i = 9/0;
         //调用service
         List<SysRole> list = sysRoleService.list();
         return Result.ok(list);
