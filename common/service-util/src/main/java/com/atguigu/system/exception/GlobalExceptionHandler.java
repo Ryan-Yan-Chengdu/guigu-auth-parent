@@ -24,4 +24,12 @@ public class GlobalExceptionHandler {
         return Result.fail().message("执行了特定异常处理");
     }
 
+    //3.自定义异常处理
+    @ExceptionHandler(GuiguException.class)
+    @ResponseBody
+    public Result error(GuiguException e){
+        e.printStackTrace();
+        return Result.fail().code(e.getCode()).message(e.getMsg());
+    }
+
 }

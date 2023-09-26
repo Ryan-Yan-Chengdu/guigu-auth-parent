@@ -3,6 +3,7 @@ package com.atguigu.system.controller;
 import com.atguigu.common.result.Result;
 import com.atguigu.model.system.SysRole;
 import com.atguigu.model.vo.SysRoleQueryVo;
+import com.atguigu.system.exception.GuiguException;
 import com.atguigu.system.service.SysRoleService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @Api(tags = "角色管理接口")
 @RestController
@@ -100,7 +102,13 @@ public class SysRoleController {
     @GetMapping("findAll")
     public Result findAllRole(){
         //TODO 模拟异常效果
-        int i = 9/0;
+        /*try{
+            int i = 9/0;
+        }catch (Exception e){
+            //手动抛出异常
+            throw new GuiguException(20001,"我执行了自定义异常处理");
+        }*/
+
         //调用service
         List<SysRole> list = sysRoleService.list();
         return Result.ok(list);

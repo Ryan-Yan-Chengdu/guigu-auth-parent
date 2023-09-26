@@ -64,7 +64,6 @@ public class SysRoleMapperTest {
         SysRole sysRole = sysRoleMapper.selectById(1);
         //设置修改值
         sysRole.setDescription("系统管理员尚硅谷");
-
         //调用方法实现修改
         int result = sysRoleMapper.updateById(sysRole);
         System.out.println("result:"+result);
