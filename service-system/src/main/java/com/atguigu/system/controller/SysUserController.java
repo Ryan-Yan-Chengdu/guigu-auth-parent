@@ -29,6 +29,15 @@ public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
 
+    @ApiOperation("更改用户状态")
+    @GetMapping("updateStatus/{id}/{status}")
+    public Result updateStatus(@PathVariable String id,
+                               @PathVariable Integer status){
+        sysUserService.updateStatus(id,status);
+        return Result.ok();
+
+    }
+
     @ApiOperation("用户列表")
     @GetMapping("/{page}/{limit}")
     public Result list(@PathVariable Long page,
@@ -92,5 +101,7 @@ public class SysUserController {
             return Result.fail().message("批量删除失败");
         }
     }
+
+
 }
 

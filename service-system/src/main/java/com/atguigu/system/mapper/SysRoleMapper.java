@@ -13,4 +13,5 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
     //条件分页查询
     IPage<SysRole> selectPage(Page<SysRole> pagePram, @Param("vo") SysRoleQueryVo sysRoleQueryVo);
 
+    
 }
