@@ -53,7 +53,7 @@ public class SysMenu  extends BaseEntity {
 
 
     //下级列表
-    @TableField(exist = false)
+    @TableField(exist = false)//表示表里面没有对应字段，不写上会和类上的注释冲突，报错
     private List<SysMenu> children;
 
     //是否选中

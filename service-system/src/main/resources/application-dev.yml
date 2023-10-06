@@ -10,7 +10,7 @@ spring:
   datasource:
     #mysql8系列要加个cj
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.1.90:3306/guigu-auth?characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://mysql.ryan.com:3306/guigu-auth?characterEncoding=utf-8&useSSL=false
     username: root
     password: Powervotex@2019
 
