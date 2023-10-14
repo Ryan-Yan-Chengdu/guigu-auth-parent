@@ -4,11 +4,13 @@ import com.atguigu.model.system.SysMenu;
 
 import com.atguigu.model.system.SysRoleMenu;
 import com.atguigu.model.vo.AssignMenuVo;
+import com.atguigu.model.vo.RouterVo;
 import com.atguigu.system.exception.GuiguException;
 import com.atguigu.system.mapper.SysMenuMapper;
 import com.atguigu.system.mapper.SysRoleMenuMapper;
 import com.atguigu.system.service.SysMenuService;
 import com.atguigu.system.utils.MenuHelper;
+import com.atguigu.system.utils.RouterHelper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.swagger.annotations.ApiModelProperty;
@@ -65,7 +67,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     //根据角色分配菜单
     @Override
     public List<SysMenu> findMenuByRoleId(String roleId) {
-        //1.获取所有菜单 status=1
+        //1.获取所有菜单 status=1的权限列表
 
         QueryWrapper<SysMenu> wrapperMenu = new QueryWrapper<>();
         wrapperMenu.eq("status", 1);
@@ -86,6 +88,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         // 拿着分配菜单id和所有菜单对比，有相同的，就让isSelect值为true
         for (SysMenu sysMenu : menuList) {
             if(roleMenuIds.contains(sysMenu.getId())){
+                //设置该权限已被分配
                 sysMenu.setSelected(true);
             }else{
                 sysMenu.setSelected(false);
@@ -116,5 +119,54 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             sysRoleMenu.setRoleId(assignMenuVo.getRoleId());
             sysRoleMenuMapper.insert(sysRoleMenu);
         }
+    }
+    //根据userid查询菜单权限值
+    @Override
+    public List<RouterVo> getUserMenuList(String userId) {
+        //admin是超级管理员，操作所有内容
+        List<SysMenu> sysMenuList = null;
+        //判断userid值是1代表超级管理员，查询所有权限数据
+        if("1".equals(userId)){
+            QueryWrapper<SysMenu> wrapper = new QueryWrapper<>();
+            wrapper.eq("status",1);
+            wrapper.orderByAsc("sort_value");
+
+            sysMenuList = baseMapper.selectList(wrapper);
+        }else {
+
+            //如果userid不是1，表示其他类型用户，查询这个用户权限
+            sysMenuList = baseMapper.findMenuListUserId(userId);
+        }
+
+        //构建树形结构
+        List<SysMenu> sysMenusTreeList= MenuHelper.buildTree(sysMenuList);
+
+        //转变为前端路由要求的数据格式
+        List<RouterVo> routerVoList = RouterHelper.buildRouters(sysMenusTreeList);
+
+        return routerVoList;
+    }
+    //根据userid查询按钮权限值
+    @Override
+    public List<String> getUserButtonList(String userId) {
+
+        List<SysMenu> sysMenuList =null;
+        //判断是否是管理员
+        if("1".equals(userId)){
+            sysMenuList = baseMapper.selectList(new QueryWrapper<SysMenu>().eq("status", 1));
+        }else{
+            sysMenuList = baseMapper.findMenuListUserId(userId);
+
+        }
+        //sysMenuList遍历
+        List<String> permissionList = new ArrayList<>();
+        for (SysMenu sysMenu: sysMenuList) {
+            //type=2
+            if(sysMenu.getType()==2){
+                String perms = sysMenu.getPerms();
+                permissionList.add(perms);
+            }
+        }
+        return permissionList;
     }
 }
