@@ -161,7 +161,10 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         //sysMenuList遍历
         List<String> permissionList = new ArrayList<>();
         for (SysMenu sysMenu: sysMenuList) {
+            //0:目录 1:菜单 2:按钮
             //type=2
+            //获取菜单权限值方法“getUserMenuList”里面，
+            //调用的RouterHelper类里面已经有“menu.getType().intValue() == 1”判断
             if(sysMenu.getType()==2){
                 String perms = sysMenu.getPerms();
                 permissionList.add(perms);

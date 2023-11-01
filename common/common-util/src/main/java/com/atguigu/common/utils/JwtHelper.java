@@ -65,7 +65,7 @@ public class JwtHelper {
     }
 
     public static void main(String[] args) {
-        String token= JwtHelper.createToken("1", "admin");
+        String token= JwtHelper.createToken("1707057091081936898", "丽丽花");
         System.out.println(token);
 
 
@@ -74,5 +74,11 @@ public class JwtHelper {
 
         String username = JwtHelper.getUsername(token);
         System.out.println("username:"+username);
+
+//        String result = MD5.encrypt("111111");
+//        System.out.println("after encryption:"+result);
+
+
+
     }
 }
