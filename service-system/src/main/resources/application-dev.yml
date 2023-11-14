@@ -14,4 +14,15 @@ spring:
     username: root
     password: Powervotex@2019
 
-
+  redis:
+    host: 192.168.1.90
+    port: 63791
+    database: 0
+    timeout: 1800000
+    password: ht@123
+    jedis:
+      pool:
+        max-active: 20 #最大连接数
+        max-wait: -1    #最大阻塞等待时间(负数表示没限制)
+        max-idle: 5    #最大空闲
+        min-idle: 0     #最小空闲
